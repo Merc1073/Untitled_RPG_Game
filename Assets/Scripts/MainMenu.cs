@@ -9,6 +9,16 @@ public class MainMenu : MonoBehaviour
 
     public AudioMixer audioMixer;
 
+    //public GameObject pauseMenu;
+
+
+    //private void Start()
+    //{
+    //    pauseMenu.SetActive(false);
+    //}
+
+    //--MAIN MENU STUFF
+
     public void PlayGame()
     {
         SceneManager.LoadScene(1);
@@ -28,4 +38,19 @@ public class MainMenu : MonoBehaviour
     {
         Screen.fullScreen = isFullscreen;
     }
+
+
+
+
+    ////--IN-GAME MENU STUFF
+
+    //public void PauseGame()
+    //{
+
+    //}
+
+    //public void ReturnMainMenu()
+    //{
+    //    SceneManager.LoadScene(0);
+    //}
 }
