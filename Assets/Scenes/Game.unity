@@ -550,7 +550,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 2209707555239369564, guid: 74effb41e76a18e4bb082b9b82512d25, type: 3}
-  playerMenuSpawn: {x: 0, y: 1, z: -10}
+  Enemy: {fileID: 8969289631442470522, guid: 27776584ee06e4848ae09405b16a124f, type: 3}
+  playerSpawnLocation: {x: 0, y: 1, z: 10}
+  enemySpawnLocation: {x: 0, y: 1, z: 30}
 --- !u!4 &513832011
 Transform:
   m_ObjectHideFlags: 0
@@ -564,7 +566,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &571926137
 GameObject:
@@ -597,6 +599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSettingsMenu: 0
   pauseMenu: {fileID: 1013948675}
+  mixer: {fileID: 24100000, guid: 79f30f1f35127004ca6005f9cfde362c, type: 2}
 --- !u!4 &571926139
 Transform:
   m_ObjectHideFlags: 0
@@ -1050,7 +1053,7 @@ Transform:
   - {fileID: 1338819078}
   - {fileID: 1888690845}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &735413617
 GameObject:
@@ -1199,7 +1202,7 @@ GameObject:
   - component: {fileID: 823009284}
   - component: {fileID: 823009283}
   - component: {fileID: 823009282}
-  m_Layer: 10
+  m_Layer: 7
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1575,7 +1578,6 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
@@ -1584,14 +1586,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &963194226
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -1651,12 +1645,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 60, z: 0}
+  m_LocalPosition: {x: 0, y: 40, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -1671,7 +1665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothSpeed: 0.05
-  offset: {x: 0, y: 60, z: 0}
+  offset: {x: 0, y: 40, z: 0}
 --- !u!1 &990877443
 GameObject:
   m_ObjectHideFlags: 0
@@ -3121,12 +3115,12 @@ MonoBehaviour:
   m_MinValue: -80
   m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: -30
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 23522651}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 571926138}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 0
         m_Arguments:
@@ -3549,7 +3543,7 @@ RectTransform:
   - {fileID: 1013948676}
   - {fileID: 23522650}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

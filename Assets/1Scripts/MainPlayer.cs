@@ -7,7 +7,7 @@ public class MainPlayer : MonoBehaviour
 {
 
     [SerializeField] ParticleSystem particles;
-    public float particleTime = 0.2f;
+    public float particleTime = 0.10f;
     public bool particlesActive = false;
 
     [SerializeField] private Rigidbody rb;
@@ -28,6 +28,7 @@ public class MainPlayer : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         particlesActive = false;
+        //anim.SetTrigger("Attack");
     }
 
     private void Update()
@@ -52,7 +53,6 @@ public class MainPlayer : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                particles.Play();
                 particlesActive = true;
                 anim.SetTrigger("Attack");
                 timeUntilMelee = meleeSpeed;
@@ -68,12 +68,14 @@ public class MainPlayer : MonoBehaviour
 
         if(particlesActive)
         {
+            particles.Play();
             particleTime -= Time.deltaTime;
         }
 
         if (particleTime <= 0f && particlesActive)
         {
-            particleTime = 0.2f;
+            particles.Stop();
+            particleTime = 0.10f;
             particlesActive = false;
         }
 

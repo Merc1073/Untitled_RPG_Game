@@ -7,6 +7,9 @@ TagManager:
   - Wall
   - Ground
   - MasterSinglePlayer
+  - ExpOrb
+  - Sword
+  - Enemy
   layers:
   - Default
   - TransparentFX

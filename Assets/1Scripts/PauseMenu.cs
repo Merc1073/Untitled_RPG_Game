@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -11,6 +12,8 @@ public class PauseMenu : MonoBehaviour
     public bool isSettingsMenu = false;
 
     public GameObject pauseMenu;
+
+    public AudioMixer mixer;
 
     private void Start()
     {
@@ -64,5 +67,10 @@ public class PauseMenu : MonoBehaviour
     public void SettingsMenuOff()
     {
         isSettingsMenu = false;
+    }
+
+    public void SetVolume(float volume)
+    {
+        mixer.SetFloat("MasterVolume", volume);
     }
 }
