@@ -1,15 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
 
-    public void OnTriggerEnter(Collider other)
+    public bool dialogueOneEnded = false;
+    public bool dialogueTwoEnded = false;
+
+    private void Update()
     {
-        if(other.gameObject.CompareTag("Player"))
+
+        Debug.Log(transform.GetChild(2).gameObject);
+
+        if(dialogueOneEnded)
         {
-            GetComponent<DialogueTrigger>().TriggerDialogue();
+            transform.GetChild(2).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(false);
+        }
+
+        if(dialogueTwoEnded)
+        {
+            transform.GetChild(2).gameObject.SetActive(false);
         }
     }
 

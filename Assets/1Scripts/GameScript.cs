@@ -9,6 +9,9 @@ public class GameScript : MonoBehaviour
     public GameObject Enemy;
     public GameObject NPC;
 
+    [Header("Variables")]
+    public bool hasPlayerObtainedNPCSword = false;
+
     [Header("Positions")]
     public Vector3 playerSpawnLocation;
     public Vector3 enemySpawnLocation;

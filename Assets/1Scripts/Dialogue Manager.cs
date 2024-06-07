@@ -12,10 +12,13 @@ public class DialogueManager : MonoBehaviour
 
     public Animator animator;
 
-    GameObject player;
-    bool playerFound = false;
+    public GameScript gScript;
 
-    public bool swordActive = false;
+    GameObject player;
+    GameObject npc;
+
+    bool playerFound = false;
+    public bool isDialogueActive = false;
 
     private Queue<string> sentences;
 
@@ -26,24 +29,32 @@ public class DialogueManager : MonoBehaviour
         //player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void Awake()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
-
     private void Update()
     {
-        if(!player && !playerFound)
+
+        if (!gScript)
+        {
+            gScript = FindObjectOfType<GameScript>();
+        }
+
+        if (!player && !playerFound)
         {
             player = GameObject.FindGameObjectWithTag("Player");
-            Debug.Log("player has been found, he is " + player);
             playerFound = true;
+        }
+
+        if(!npc)
+        {
+            npc = GameObject.FindGameObjectWithTag("NPC");
+            Debug.Log("NPC found, it's: " + npc);
         }
 
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
+
+        isDialogueActive = true;
 
         animator.SetBool("IsOpen", true);
 
@@ -86,15 +97,32 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    public void InterruptDialogue()
+    {
+        isDialogueActive = false;
+        animator.SetBool("IsOpen", false);
+    }
+
     void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
 
-        if(!swordActive)
+        if(!npc.GetComponent<NPC>().dialogueOneEnded)
         {
-            player.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
-            swordActive = true;
+            if(!player.GetComponent<MainPlayer>().swordActive)
+            {
+                player.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+                player.GetComponent<MainPlayer>().swordActive = true;
+                gScript.hasPlayerObtainedNPCSword = true;
+                npc.GetComponent<NPC>().dialogueOneEnded = true;
+                isDialogueActive = false;
+            }
         }
+
+        //if(!npc.GetComponent<NPC>().dialogueTwoEnded)
+        //{
+        //    npc.GetComponent<NPC>().dialogueTwoEnded = true;
+        //}
     }
 
 }

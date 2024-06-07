@@ -17,12 +17,12 @@ public class MainPlayer : MonoBehaviour
     private float rotateVelocity;
     private float rotateSpeedMovement;
 
+    public bool swordActive = false;
+
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
-        //anim.SetTrigger("Attack");
     }
 
     private void Update()
@@ -45,16 +45,6 @@ public class MainPlayer : MonoBehaviour
             }
         }
 
-
-
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if(other.tag == "Enemy")
-    //    {
-    //        Debug.Log("Enemy hit.");
-    //    }
-    //}
 
 }

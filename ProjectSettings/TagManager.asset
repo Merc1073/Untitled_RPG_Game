@@ -9,6 +9,7 @@ TagManager:
   - MasterSinglePlayer
   - ExpOrb
   - Sword
+  - NPC
   - Enemy
   layers:
   - Default
