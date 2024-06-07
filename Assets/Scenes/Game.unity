@@ -657,6 +657,7 @@ MonoBehaviour:
   Player: {fileID: 2209707555239369564, guid: 74effb41e76a18e4bb082b9b82512d25, type: 3}
   Enemy: {fileID: 8969289631442470522, guid: 27776584ee06e4848ae09405b16a124f, type: 3}
   NPC: {fileID: 8488663894318989455, guid: 54391f944fd3a6c4dacd957aef682d64, type: 3}
+  hasPlayerObtainedNPCSword: 0
   playerSpawnLocation: {x: 0, y: 1, z: 0}
   enemySpawnLocation: {x: 0, y: 1, z: 30}
   npcSpawnLocation: {x: 0, y: 1, z: 37.5}
@@ -720,7 +721,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &611787767
 GameObject:
@@ -892,7 +893,7 @@ Transform:
   - {fileID: 1639288636}
   - {fileID: 725865150}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &639994963
 GameObject:
@@ -1464,7 +1465,7 @@ Transform:
   - {fileID: 1338819078}
   - {fileID: 1888690845}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &725865149
 GameObject:
@@ -2159,7 +2160,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -2678,6 +2679,8 @@ MonoBehaviour:
   nameText: {fileID: 1844621331}
   dialogueText: {fileID: 611787769}
   animator: {fileID: 889865602}
+  gScript: {fileID: 0}
+  isDialogueActive: 0
 --- !u!4 &1183321214
 Transform:
   m_ObjectHideFlags: 0
@@ -4580,7 +4583,7 @@ RectTransform:
   - {fileID: 23522650}
   - {fileID: 889865601}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

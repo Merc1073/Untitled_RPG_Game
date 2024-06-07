@@ -12,8 +12,6 @@ public class NPC : MonoBehaviour
     private void Update()
     {
 
-        Debug.Log(transform.GetChild(2).gameObject);
-
         if(dialogueOneEnded)
         {
             transform.GetChild(2).gameObject.SetActive(true);

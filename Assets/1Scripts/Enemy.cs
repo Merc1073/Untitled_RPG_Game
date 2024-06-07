@@ -14,13 +14,13 @@ public class Enemy : MonoBehaviour
 
     public MeshRenderer mesh;
 
-    //private HealthBar enemyHealthBar;
+    public GameObject healthBar;
 
     //private EnemyPlaySound soundPlay;
 
 
-    [SerializeField] private int maxHealth;
-    [SerializeField] private int currentHealth;
+    public float maxHealth;
+    public float currentHealth;
 
     public float forceMultiplier;
     public float totalForceMultiplier;
@@ -31,19 +31,28 @@ public class Enemy : MonoBehaviour
 
     public Vector3 expOrbPosition;
 
+    bool playerFound = false;
+
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        player = GameObject.FindGameObjectWithTag("Player");
-
     }
 
 
     private void Update()
     {
+
+        if(!player && !playerFound)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            playerFound = true;
+        }
+
+        healthBar.GetComponent<EnemyHealthBar>().health = currentHealth;
+        healthBar.GetComponent<EnemyHealthBar>().maxHealth = maxHealth;
+
         totalForceMultiplier = forceMultiplier;// + gamescript.globalEnemyForceMultiplier;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
@@ -51,12 +60,13 @@ public class Enemy : MonoBehaviour
         Vector3 directionToPlayer = transform.position - player.transform.position;
         directionToPlayer = directionToPlayer.normalized * forceMultiplier;// + gamescript.globalEnemyForceMultiplier);
 
+        if(distanceToPlayer < 20f) 
+        { 
+            rb.AddForce(-directionToPlayer * Time.deltaTime);
+        }
 
-        rb.AddForce(-directionToPlayer * Time.deltaTime);
 
-        Debug.Log(currentHealth);
-
-        if (currentHealth <= 0)
+        if (currentHealth <= 0f)
         {
 
             GameObject clone;
@@ -101,13 +111,6 @@ public class Enemy : MonoBehaviour
 
             if (other.gameObject.CompareTag("Sword"))
             {
-                currentHealth -= 1;
-
-                //if (enemyHealthBar)
-                //{
-                //    enemyHealthBar.UpdateHealthBar(maxHealth, currentHealth);
-                //}
-
                 rb.AddForce(directionToPlayer * Time.deltaTime, ForceMode.Impulse);
             }
         }

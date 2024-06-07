@@ -39,14 +39,13 @@ public class DialogueManager : MonoBehaviour
 
         if (!player && !playerFound)
         {
-            player = GameObject.FindGameObjectWithTag("Player");
+            player = GameObject.FindGameObjectWithTag("MainPlayer");
             playerFound = true;
         }
 
         if(!npc)
         {
             npc = GameObject.FindGameObjectWithTag("NPC");
-            Debug.Log("NPC found, it's: " + npc);
         }
 
     }
@@ -109,10 +108,10 @@ public class DialogueManager : MonoBehaviour
 
         if(!npc.GetComponent<NPC>().dialogueOneEnded)
         {
-            if(!player.GetComponent<MainPlayer>().swordActive)
+            if(!player.transform.GetChild(0).GetComponent<MainPlayer>().swordActive)
             {
-                player.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
-                player.GetComponent<MainPlayer>().swordActive = true;
+                player.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+                player.transform.GetChild(0).GetComponent<MainPlayer>().swordActive = true;
                 gScript.hasPlayerObtainedNPCSword = true;
                 npc.GetComponent<NPC>().dialogueOneEnded = true;
                 isDialogueActive = false;

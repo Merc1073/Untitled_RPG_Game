@@ -14,6 +14,10 @@ public class MainPlayer : MonoBehaviour
 
     [SerializeField] private GameObject reticle;
 
+    [SerializeField] private GameObject healthBar;
+
+    [SerializeField] private GameObject mainPlayer;
+
     private float rotateVelocity;
     private float rotateSpeedMovement;
 
@@ -35,9 +39,9 @@ public class MainPlayer : MonoBehaviour
 
         rb.AddForce(movement * forceMultiplier * Time.deltaTime);
 
-        if(GetComponentInChildren<Sword>())
+        if (mainPlayer.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Sword>())
         {
-            if(GetComponentInChildren<Sword>().timeUntilMelee <= 0)
+            if (mainPlayer.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Sword>().timeUntilMelee <= 0)
             {
                 Quaternion rotationToLookAt = Quaternion.LookRotation(reticle.transform.position - transform.position);
                 float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationToLookAt.eulerAngles.y, ref rotateVelocity, rotateSpeedMovement * (Time.deltaTime * 5));
@@ -45,6 +49,22 @@ public class MainPlayer : MonoBehaviour
             }
         }
 
+    }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.gameObject.CompareTag("Enemy"))
+    //    {
+    //        healthBar.GetComponent<PlayerHealthBar>().health -= Random.Range(5f, 10f);
+    //    }
+    //}
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            healthBar.GetComponent<PlayerHealthBar>().health -= Random.Range(5f, 10f);
+        }
     }
 
 }

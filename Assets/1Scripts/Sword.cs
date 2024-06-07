@@ -6,10 +6,6 @@ using static UnityEngine.ParticleSystem;
 public class Sword : MonoBehaviour
 {
 
-    
-
-    
-
     [SerializeField] ParticleSystem particles;
     public float particleTime = 0.10f;
     public bool particlesActive = false;
@@ -18,7 +14,7 @@ public class Sword : MonoBehaviour
 
     [SerializeField] private Animator anim;
     [SerializeField] private float meleeSpeed;
-    [SerializeField] private float damage;
+    public float swordDamage;
 
     public float timeUntilMelee = 0f;
 
@@ -63,6 +59,7 @@ public class Sword : MonoBehaviour
         if(other.gameObject.CompareTag("Enemy"))
         {
             Instantiate(particles1, transform.position, Quaternion.identity);
+            other.gameObject.GetComponent<Enemy>().currentHealth -= swordDamage;
         }
     }
 

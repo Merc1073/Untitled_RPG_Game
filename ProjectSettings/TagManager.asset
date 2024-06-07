@@ -11,6 +11,7 @@ TagManager:
   - Sword
   - NPC
   - Enemy
+  - MainPlayer
   layers:
   - Default
   - TransparentFX
