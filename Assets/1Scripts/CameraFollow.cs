@@ -27,7 +27,6 @@ public class CameraFollow : MonoBehaviour
         if(!player && !ranOnce)
         {
             player = GameObject.FindGameObjectWithTag("Player");
-            Debug.Log("Player found, it is: " + player);
         }
 
         if (player)

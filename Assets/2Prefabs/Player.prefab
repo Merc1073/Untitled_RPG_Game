@@ -257,7 +257,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff3686f10444784eadea26ff57c838e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particles: {fileID: 3912561271744969795}
+  particleTime: 0.1
+  particlesActive: 0
   particles1: {fileID: 8972455378288872597, guid: 83f4c1b3cd236b74fa87b66e172eb19c, type: 3}
+  anim: {fileID: 4813463582088117946}
+  meleeSpeed: 0.25
+  damage: 1
+  timeUntilMelee: 0
 --- !u!1 &5206291802544125846
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,15 +448,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e232bcc829d8e46870af1428b94700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: {fileID: 3912561271744969795}
-  particleTime: 0
-  particlesActive: 0
   rb: {fileID: 0}
-  reticle: {fileID: 3026004936903701737}
   forceMultiplier: 15000
-  anim: {fileID: 4813463582088117946}
-  meleeSpeed: 0.25
-  damage: 10
+  reticle: {fileID: 3026004936903701737}
 --- !u!135 &9104666797672152963
 SphereCollider:
   m_ObjectHideFlags: 0

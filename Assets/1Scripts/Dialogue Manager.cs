@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,13 +12,35 @@ public class DialogueManager : MonoBehaviour
 
     public Animator animator;
 
+    GameObject player;
+    bool playerFound = false;
+
+    public bool swordActive = false;
+
     private Queue<string> sentences;
 
     void Start()
     {
         sentences = new Queue<string>();
+
+        //player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private void Update()
+    {
+        if(!player && !playerFound)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            Debug.Log("player has been found, he is " + player);
+            playerFound = true;
+        }
+
+    }
 
     public void StartDialogue(Dialogue dialogue)
     {
@@ -66,6 +89,12 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
+
+        if(!swordActive)
+        {
+            player.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+            swordActive = true;
+        }
     }
 
 }
