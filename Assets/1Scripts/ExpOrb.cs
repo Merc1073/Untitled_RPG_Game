@@ -28,6 +28,8 @@ public class ExpOrb : MonoBehaviour
 
     public float maxDistanceToPlayer;
 
+    public float timeUntilMagnetStart;
+
     bool distanceTriggered = false;
     public bool particOnce = true;
 
@@ -49,6 +51,8 @@ public class ExpOrb : MonoBehaviour
     void Update()
     {
 
+        timeUntilMagnetStart -= Time.deltaTime;
+
         if(!playerObject)
         {
             playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -64,7 +68,7 @@ public class ExpOrb : MonoBehaviour
             transform.position += new Vector3(0, -0.1f, 0);
         }
 
-        if(playerObject != null)
+        if(playerObject != null && timeUntilMagnetStart <= 0f)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, playerObject.transform.position);
 
