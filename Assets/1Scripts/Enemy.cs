@@ -55,16 +55,19 @@ public class Enemy : MonoBehaviour
 
         totalForceMultiplier = forceMultiplier;// + gamescript.globalEnemyForceMultiplier;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-        Vector3 directionToPlayer = transform.position - player.transform.position;
-        directionToPlayer = directionToPlayer.normalized * forceMultiplier;// + gamescript.globalEnemyForceMultiplier);
+        if(player)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-        if(distanceToPlayer < 20f) 
-        { 
-            rb.AddForce(-directionToPlayer * Time.deltaTime);
+            Vector3 directionToPlayer = transform.position - player.transform.position;
+            directionToPlayer = directionToPlayer.normalized * forceMultiplier;// + gamescript.globalEnemyForceMultiplier);
+
+            if (distanceToPlayer < 20f)
+            {
+                rb.AddForce(-directionToPlayer * Time.deltaTime);
+            }
         }
-
 
         if (currentHealth <= 0f)
         {

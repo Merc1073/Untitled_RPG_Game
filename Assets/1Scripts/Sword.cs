@@ -6,6 +6,10 @@ using static UnityEngine.ParticleSystem;
 public class Sword : MonoBehaviour
 {
 
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioClip swordWhoosh1;
+    [SerializeField] AudioClip swordWhoosh2;
+
     [SerializeField] ParticleSystem particles;
     public float particleTime = 0.10f;
     public bool particlesActive = false;
@@ -27,12 +31,31 @@ public class Sword : MonoBehaviour
     private void Update()
     {
 
+        int soundToPlay = Random.Range(1, 3);
+
+        Debug.Log(soundToPlay);
+
         timeUntilMelee -= Time.deltaTime;
 
         if (timeUntilMelee <= 0f)
         {
             if (Input.GetMouseButtonDown(0))
             {
+
+                if(soundToPlay == 1)
+                {
+                    source.clip = swordWhoosh1;
+                    source.pitch = Random.Range(0.8f, 1f);
+                    source.Play();
+                }
+
+                if(soundToPlay > 1)
+                {
+                    source.pitch = Random.Range(0.8f, 1f);
+                    source.clip = swordWhoosh2;
+                    source.Play();
+                }
+
                 particlesActive = true;
                 anim.SetTrigger("Attack");
                 timeUntilMelee = meleeSpeed;
