@@ -33,8 +33,6 @@ public class Sword : MonoBehaviour
 
         int soundToPlay = Random.Range(1, 3);
 
-        Debug.Log(soundToPlay);
-
         timeUntilMelee -= Time.deltaTime;
 
         if (timeUntilMelee <= 0f)

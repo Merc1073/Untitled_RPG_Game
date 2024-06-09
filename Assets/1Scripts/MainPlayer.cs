@@ -23,6 +23,8 @@ public class MainPlayer : MonoBehaviour
 
     public bool swordActive = false;
 
+    GameScript gScript;
+
 
     private void Start()
     {
@@ -32,22 +34,31 @@ public class MainPlayer : MonoBehaviour
     private void Update()
     {
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-
-        Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
-
-        rb.AddForce(movement * forceMultiplier * Time.deltaTime);
-
-        if (mainPlayer.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Sword>())
+        if(!gScript)
         {
-            if (mainPlayer.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Sword>().timeUntilMelee <= 0)
+            gScript = FindObjectOfType<GameScript>();
+        }
+
+        if(gScript.canPlayerControl)
+        {
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+
+            Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
+
+            rb.AddForce(movement * forceMultiplier * Time.deltaTime);
+
+            if (mainPlayer.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Sword>())
             {
-                Quaternion rotationToLookAt = Quaternion.LookRotation(reticle.transform.position - transform.position);
-                float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationToLookAt.eulerAngles.y, ref rotateVelocity, rotateSpeedMovement * (Time.deltaTime * 5));
-                transform.eulerAngles = new Vector3(0, rotationY, 0);
+                if (mainPlayer.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Sword>().timeUntilMelee <= 0)
+                {
+                    Quaternion rotationToLookAt = Quaternion.LookRotation(reticle.transform.position - transform.position);
+                    float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationToLookAt.eulerAngles.y, ref rotateVelocity, rotateSpeedMovement * (Time.deltaTime * 5));
+                    transform.eulerAngles = new Vector3(0, rotationY, 0);
+                }
             }
         }
+        
 
     }
 

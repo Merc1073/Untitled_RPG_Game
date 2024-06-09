@@ -6,22 +6,26 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    GameScript gScript;
 
     public AudioMixer audioMixer;
 
-    //public GameObject pauseMenu;
 
+    private void Update()
+    {
+        if (!gScript)
+        {
+            gScript = FindObjectOfType<GameScript>();
+        }
+    }
 
-    //private void Start()
-    //{
-    //    pauseMenu.SetActive(false);
-    //}
-
-    //--MAIN MENU STUFF
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(1);
+        gScript.isPlayerChangingScenes = true;
+        gScript.isMainMenuActive = false;
+
+        StartCoroutine(StartingGame());
     }
 
     public void QuitGame()
@@ -39,7 +43,12 @@ public class MainMenu : MonoBehaviour
         Screen.fullScreen = isFullscreen;
     }
 
+    IEnumerator StartingGame()
+    {
+        yield return new WaitForSeconds(gScript.fadeTime);
 
+        SceneManager.LoadScene(1);
+    }
 
 
     ////--IN-GAME MENU STUFF

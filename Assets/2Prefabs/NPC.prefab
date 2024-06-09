@@ -267,7 +267,8 @@ MonoBehaviour:
     name: Generic NPC
     sentences:
     - You look like a generic player.
-    - We have 5 weird cubes harassing our villagers. They are outside of the village.
+    - We have 5 weird cubes harassing our villagers. They are inside the cave, just
+      to the right of my house.
     - Can you go deal with them?
     - Here, take this basic sword. Should get the job done.
     - Thanks. GL HF.

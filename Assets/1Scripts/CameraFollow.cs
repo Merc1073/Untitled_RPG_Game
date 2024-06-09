@@ -11,18 +11,8 @@ public class CameraFollow : MonoBehaviour
 
     bool ranOnce = false;
 
-    //private void Start()
-    //{
-    //    player = GameObject.FindGameObjectWithTag("Player");
-    //}
-
     private void FixedUpdate()
     {
-        //if (!player && !ranOnce)
-        //{
-        //    multiPlayer = GameObject.FindGameObjectWithTag("MultiPlayer");
-        //    ranOnce = true;
-        //}
 
         if(!player && !ranOnce)
         {
@@ -37,12 +27,5 @@ public class CameraFollow : MonoBehaviour
             transform.position = smoothedPosition;
         }
 
-        //else if (multiPlayer != null)
-        //{
-        //    Vector3 desiredPosition = multiPlayer.transform.position + offset;
-        //    Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-
-        //    transform.position = smoothedPosition;
-        //}
     }
 }
