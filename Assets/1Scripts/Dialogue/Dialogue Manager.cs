@@ -45,7 +45,6 @@ public class DialogueManager : MonoBehaviour
             {
                 playerFound = true;
             }
-            
         }
 
         if(!npc)
@@ -57,7 +56,6 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-
         isDialogueActive = true;
 
         animator.SetBool("IsOpen", true);
@@ -72,7 +70,6 @@ public class DialogueManager : MonoBehaviour
         }
 
         DisplayNextSentence();
-
     }
 
     public void DisplayNextSentence()
@@ -86,7 +83,6 @@ public class DialogueManager : MonoBehaviour
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
-
     }
 
     IEnumerator TypeSentence (string sentence)
@@ -98,7 +94,6 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text += letter;
             yield return new WaitForSeconds(0.02f);
         }
-
     }
 
     public void InterruptDialogue()
@@ -111,17 +106,13 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("IsOpen", false);
 
-        if(!npc.GetComponent<NPC>().dialogueOneEnded)
+        if(!gScript.hasPlayerObtainedNPCSword)
         {
-            if(!player.transform.GetChild(0).GetComponent<MainPlayer>().swordActive)
-            {
-                player.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
-                player.transform.GetChild(0).GetComponent<MainPlayer>().swordActive = true;
-                gScript.hasPlayerObtainedNPCSword = true;
-                npc.GetComponent<NPC>().dialogueOneEnded = true;
-                isDialogueActive = false;
-            }
+            //player.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+            gScript.npcDialogueOneEnded = true;
+            isDialogueActive = false;
         }
+        
 
         //if(!npc.GetComponent<NPC>().dialogueTwoEnded)
         //{

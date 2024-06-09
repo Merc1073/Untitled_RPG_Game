@@ -5,30 +5,30 @@ using UnityEngine;
 
 public class MainPlayer : MonoBehaviour
 {
-
     
+    GameScript gScript;
+
+    public Transform playerSword;
 
     [SerializeField] private Rigidbody rb;
     
     [SerializeField] private float forceMultiplier;
 
     [SerializeField] private GameObject reticle;
-
     [SerializeField] private GameObject healthBar;
-
     [SerializeField] private GameObject mainPlayer;
 
     private float rotateVelocity;
     private float rotateSpeedMovement;
 
-    public bool swordActive = false;
-
-    GameScript gScript;
+    public float health;
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        playerSword = mainPlayer.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0);
     }
 
     private void Update()
@@ -37,6 +37,12 @@ public class MainPlayer : MonoBehaviour
         if(!gScript)
         {
             gScript = FindObjectOfType<GameScript>();
+        }
+
+        if(gScript.hasPlayerObtainedNPCSword)
+        {
+            //transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+            transform.parent.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
         }
 
         if(gScript.canPlayerControl)
@@ -48,9 +54,9 @@ public class MainPlayer : MonoBehaviour
 
             rb.AddForce(movement * forceMultiplier * Time.deltaTime);
 
-            if (mainPlayer.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Sword>())
+            if (playerSword.GetComponent<Sword>())
             {
-                if (mainPlayer.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Sword>().timeUntilMelee <= 0)
+                if (playerSword.GetComponent<Sword>().timeUntilMelee <= 0)
                 {
                     Quaternion rotationToLookAt = Quaternion.LookRotation(reticle.transform.position - transform.position);
                     float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationToLookAt.eulerAngles.y, ref rotateVelocity, rotateSpeedMovement * (Time.deltaTime * 5));
@@ -58,7 +64,17 @@ public class MainPlayer : MonoBehaviour
                 }
             }
         }
-        
+
+        health = healthBar.GetComponent<PlayerHealthBar>().health;
+
+        gScript.gsPlayerHealth = health;
+
+        gScript.gsPlayerPosition = transform.position;
+
+        if(gScript.toDestroyPlayer)
+        {
+            Destroy(gameObject.transform.parent.gameObject);
+        }
 
     }
 

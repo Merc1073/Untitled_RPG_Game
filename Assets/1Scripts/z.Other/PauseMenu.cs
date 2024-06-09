@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    GameScript gScript;
+    public GameScript gScript;
 
     public static bool isPaused = false;
 
     public bool isSettingsMenu = false;
+
+    bool gameScriptFound = false;
 
     public GameObject pauseMenu;
 
@@ -24,9 +26,14 @@ public class PauseMenu : MonoBehaviour
     private void Update()
     {
 
-        if (!gScript)
+        if (!gScript && !gameScriptFound)
         {
             gScript = FindObjectOfType<GameScript>();
+
+            if(gScript)
+            {
+                gameScriptFound = true;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && !isSettingsMenu)
@@ -62,6 +69,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         gScript.isMainMenuActive = true;
+        gScript.arePrefabsInstantiated = false;
+
+        gScript.toDestroyPlayer = true;
+        gScript.toDestroyNpc = true;
+
         SceneManager.LoadScene(0);
     }
 

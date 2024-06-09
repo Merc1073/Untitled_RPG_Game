@@ -25,6 +25,9 @@ public class MainMenu : MonoBehaviour
         gScript.isPlayerChangingScenes = true;
         gScript.isMainMenuActive = false;
 
+        gScript.toDestroyPlayer = false;
+        gScript.toDestroyNpc = false;
+
         StartCoroutine(StartingGame());
     }
 
