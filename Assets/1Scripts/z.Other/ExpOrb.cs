@@ -114,7 +114,7 @@ public class ExpOrb : MonoBehaviour
                 Instantiate(particles, transform.position, Quaternion.identity);
 
                 Destroy(mesh);
-                Destroy(gameObject);
+                Destroy(transform.parent.gameObject);
 
             }
         }

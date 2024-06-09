@@ -19,7 +19,7 @@ public class MainPlayer : MonoBehaviour
     [SerializeField] private GameObject mainPlayer;
 
     private float rotateVelocity;
-    private float rotateSpeedMovement;
+    //private float rotateSpeedMovement;
 
     public float health;
 
@@ -59,7 +59,7 @@ public class MainPlayer : MonoBehaviour
                 if (playerSword.GetComponent<Sword>().timeUntilMelee <= 0)
                 {
                     Quaternion rotationToLookAt = Quaternion.LookRotation(reticle.transform.position - transform.position);
-                    float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationToLookAt.eulerAngles.y, ref rotateVelocity, rotateSpeedMovement * (Time.deltaTime * 5));
+                    float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationToLookAt.eulerAngles.y, ref rotateVelocity, 0 * (Time.deltaTime * 5));
                     transform.eulerAngles = new Vector3(0, rotationY, 0);
                 }
             }

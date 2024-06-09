@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    GameScript gScript;
 
     GameObject player;
     Rigidbody rb;
@@ -44,7 +45,12 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
 
-        if(!player && !playerFound)
+        if (!gScript)
+        {
+            gScript = FindObjectOfType<GameScript>();
+        }
+
+        if (!player && !playerFound)
         {
             player = GameObject.FindGameObjectWithTag("Player");
             playerFound = true;
@@ -98,8 +104,13 @@ public class Enemy : MonoBehaviour
 
             //particOnce = false;
 
+            if(transform.parent.gameObject.name == "CaveEnemy")
+            {
+                gScript.caveEnemyCounter--;
+            }
+
             Destroy(mesh);
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
 
         }
     }

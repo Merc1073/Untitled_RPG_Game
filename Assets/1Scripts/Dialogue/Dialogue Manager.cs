@@ -18,7 +18,7 @@ public class DialogueManager : MonoBehaviour
     GameObject npc;
 
     bool playerFound = false;
-    public bool isDialogueActive = false;
+    //public bool isDialogueActive = false;
 
     private Queue<string> sentences;
 
@@ -56,7 +56,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        isDialogueActive = true;
+        gScript.isDialogueActive = true;
 
         animator.SetBool("IsOpen", true);
 
@@ -98,19 +98,25 @@ public class DialogueManager : MonoBehaviour
 
     public void InterruptDialogue()
     {
-        isDialogueActive = false;
+        gScript.isDialogueActive = false;
         animator.SetBool("IsOpen", false);
     }
 
     void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
+        gScript.isDialogueActive = false;
 
         if(!gScript.hasPlayerObtainedNPCSword)
         {
-            //player.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
             gScript.npcDialogueOneEnded = true;
-            isDialogueActive = false;
+            gScript.isDialogueActive = false;
+        }
+
+        if(!gScript.npcDialogueThreeEnded && gScript.hasKill5CubeQuestFinished)
+        {
+            gScript.npcDialogueThreeEnded = true;
+            //gScript.isDialogueActive = false;
         }
         
 

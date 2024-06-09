@@ -6,9 +6,6 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
 
-    //public bool dialogueOneEnded = false;
-    public bool dialogueTwoEnded = false;
-
     GameScript gScript;
 
     private void Update()
@@ -19,21 +16,47 @@ public class NPC : MonoBehaviour
             gScript = FindObjectOfType<GameScript>();
         }
 
-        if(gScript.npcDialogueOneEnded)
+
+        if(!gScript.npcDialogueOneEnded && !gScript.hasKill5CubeQuestFinished)
+        {
+            transform.GetChild(4).gameObject.SetActive(false);
+            transform.GetChild(3).gameObject.SetActive(false);
+            transform.GetChild(2).gameObject.SetActive(false);
+            transform.GetChild(1).gameObject.SetActive(true);
+        }
+
+        if (gScript.npcDialogueOneEnded && !gScript.hasKill5CubeQuestFinished)
         {
             gScript.hasPlayerObtainedNPCSword = true;
             gScript.hasKill5CubeQuestStarted = true;
 
+            gScript.npcDialogueOneEnded = true;
+
+            transform.GetChild(4).gameObject.SetActive(false);
+            transform.GetChild(3).gameObject.SetActive(false);
             transform.GetChild(2).gameObject.SetActive(true);
             transform.GetChild(1).gameObject.SetActive(false);
         }
 
-        if(dialogueTwoEnded)
+        if(gScript.hasKill5CubeQuestFinished)
         {
+            gScript.npcDialogueTwoEnded = true;
+
+            transform.GetChild(4).gameObject.SetActive(false);
+            transform.GetChild(3).gameObject.SetActive(true);
             transform.GetChild(2).gameObject.SetActive(false);
+            transform.GetChild(1).gameObject.SetActive(false);
         }
 
-        if(gScript.toDestroyNpc)
+        if(gScript.npcDialogueThreeEnded)
+        {
+            transform.GetChild(4).gameObject.SetActive(true);
+            transform.GetChild(3).gameObject.SetActive(false);
+            transform.GetChild(2).gameObject.SetActive(false);
+            transform.GetChild(1).gameObject.SetActive(false);
+        }
+
+        if (gScript.toDestroyNpc)
         {
             Destroy(gameObject);
         }

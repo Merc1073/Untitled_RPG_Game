@@ -2126,7 +2126,9 @@ MonoBehaviour:
   gsPlayerPosition: {x: 0, y: 0, z: 0}
   gsPlayerPositionOffset: {x: 0, y: 0, z: 0}
   fadeTime: 0.75
+  caveEnemyCounter: 5
   isMainMenuActive: 1
+  hasGameStarted: 0
   isPlayerChangingScenes: 0
   canPlayerControl: 1
   toDestroyPlayer: 0
@@ -2140,8 +2142,12 @@ MonoBehaviour:
   currentScene:
     m_Handle: 0
   hasPlayerObtainedNPCSword: 0
-  hasKill5CubeQuestStarted: 0
   npcDialogueOneEnded: 0
+  npcDialogueTwoEnded: 0
+  npcDialogueThreeEnded: 0
+  isCaveDoorOpen: 0
+  hasKill5CubeQuestStarted: 0
+  hasKill5CubeQuestFinished: 0
 --- !u!4 &1125531996
 Transform:
   m_ObjectHideFlags: 0
@@ -2797,6 +2803,7 @@ GameObject:
   - component: {fileID: 1841695065}
   - component: {fileID: 1841695064}
   - component: {fileID: 1841695063}
+  - component: {fileID: 1841695066}
   m_Layer: 5
   m_Name: LoadGameButton
   m_TagString: Untagged
@@ -2869,25 +2876,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1125531995}
-        m_TargetAssemblyTypeName: GameScript, Assembly-CSharp
-        m_MethodName: LoadPlayer
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1125531995}
-        m_TargetAssemblyTypeName: GameScript, Assembly-CSharp
-        m_MethodName: LoadGameData
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2931,6 +2938,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841695061}
   m_CullTransparentMesh: 1
+--- !u!114 &1841695066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841695061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4b441e51c05eb14594570f7610b2044, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadButton: {fileID: 1841695063}
+  originalSaveCooldown: 1
+  saveCooldown: 0
 --- !u!1 &1848571839
 GameObject:
   m_ObjectHideFlags: 0

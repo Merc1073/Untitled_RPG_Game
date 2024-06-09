@@ -69,6 +69,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         gScript.isMainMenuActive = true;
+        gScript.hasGameStarted = false;
         gScript.arePrefabsInstantiated = false;
 
         gScript.toDestroyPlayer = true;

@@ -27,7 +27,6 @@ public class LoadGameButton : MonoBehaviour
             loadButton.onClick.AddListener(() => gScript.LoadGameData());
 
             saveCooldown = originalSaveCooldown;
-            Debug.Log("Button clicked.");
         }
 
     }

@@ -6,7 +6,7 @@ public class NPCCollision : MonoBehaviour
 {
 
     GameScript gScript;
-    DialogueManager dialManager;
+    //DialogueManager dialManager;
 
     [SerializeField]
     private bool insideTrigger = false;
@@ -18,21 +18,21 @@ public class NPCCollision : MonoBehaviour
             gScript = FindObjectOfType<GameScript>();
         }
 
-        if(!dialManager)
-        {
-            dialManager = FindObjectOfType<DialogueManager>();
-        }
-
+        //if (!dialManager)
+        //{
+        //    dialManager = FindObjectOfType<DialogueManager>();
+        //}
 
         if(insideTrigger)
         {
-            if(Input.GetMouseButtonDown(0) && !dialManager.isDialogueActive)
+            if(Input.GetMouseButtonDown(0) && !gScript.isDialogueActive)
             {
+                Debug.Log("Dialogue triggered");
                 GetComponent<DialogueTrigger>().TriggerDialogue();
             }
         }
 
-        else
+        if(!insideTrigger)
         {
             FindObjectOfType<DialogueManager>().InterruptDialogue();
         }
@@ -40,23 +40,23 @@ public class NPCCollision : MonoBehaviour
 
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        //if (other.gameObject.CompareTag("Player") && !gScript.hasPlayerObtainedNPCSword && !GetComponentInParent<NPC>().dialogueOneEnded)
-        //{
-        //    GetComponent<DialogueTrigger>().TriggerDialogue();
-        //}
+    //public void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Player") && !gScript.hasPlayerObtainedNPCSword && !GetComponentInParent<NPC>().dialogueOneEnded)
+    //    {
+    //        GetComponent<DialogueTrigger>().TriggerDialogue();
+    //    }
 
-        //if(other.gameObject.CompareTag("Player") && !gScript.hasPlayerObtainedNPCSword && GetComponentInParent<NPC>().dialogueOneEnded)
-        //{
-        //    GetComponent<DialogueTrigger>().TriggerDialogue();
-        //}
+    //    if (other.gameObject.CompareTag("Player") && !gScript.hasPlayerObtainedNPCSword && GetComponentInParent<NPC>().dialogueOneEnded)
+    //    {
+    //        GetComponent<DialogueTrigger>().TriggerDialogue();
+    //    }
 
-        //if (other.gameObject.CompareTag("Player") && Input.GetMouseButtonDown(0))
-        //{
-        //    GetComponent<DialogueTrigger>().TriggerDialogue();
-        //}
-    }
+    //    if (other.gameObject.CompareTag("Player") && Input.GetMouseButtonDown(0))
+    //    {
+    //        GetComponent<DialogueTrigger>().TriggerDialogue();
+    //    }
+    //}
 
     public void OnTriggerStay(Collider other)
     {
@@ -72,6 +72,7 @@ public class NPCCollision : MonoBehaviour
         if(other.gameObject.CompareTag("Player"))
         {
             insideTrigger = false;
+            Debug.Log("Player left.");
         }
     }
 
