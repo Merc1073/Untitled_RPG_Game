@@ -12,9 +12,9 @@ public class DialogueManager : MonoBehaviour
 
     public Animator animator;
 
-    public GameScript gScript;
+    GameScript gScript;
 
-    GameObject player;
+    public GameObject player;
     GameObject npc;
 
     bool playerFound = false;
@@ -40,7 +40,12 @@ public class DialogueManager : MonoBehaviour
         if (!player && !playerFound)
         {
             player = GameObject.FindGameObjectWithTag("MainPlayer");
-            playerFound = true;
+
+            if(player)
+            {
+                playerFound = true;
+            }
+            
         }
 
         if(!npc)

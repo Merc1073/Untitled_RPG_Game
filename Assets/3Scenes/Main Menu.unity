@@ -1858,6 +1858,8 @@ MonoBehaviour:
   playerSpawnLocation: {x: 0, y: 1, z: 0}
   enemySpawnLocation: {x: 0, y: 1, z: 30}
   npcSpawnLocation: {x: 0, y: 1, z: 37.5}
+  currentScene:
+    m_Handle: 0
 --- !u!4 &1017548748
 Transform:
   m_ObjectHideFlags: 0

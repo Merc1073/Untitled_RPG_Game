@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameScript : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class GameScript : MonoBehaviour
     public Vector3 enemySpawnLocation;
     public Vector3 npcSpawnLocation;
 
+    [Header("Scenes")]
+    public Scene currentScene;
+
 
     private void Awake()
     {
@@ -53,11 +57,21 @@ public class GameScript : MonoBehaviour
         //Instantiate(Enemy, enemySpawnLocation, Quaternion.Euler(0, 0, 0));
         //Instantiate(Enemy, enemySpawnLocation, Quaternion.Euler(0, 0, 0));
 
+
+
     }
 
     private void Update()
     {
-        if (!isMainMenuActive && !arePrefabsInstantiated)
+
+        currentScene = SceneManager.GetActiveScene();
+
+        if(currentScene.name == "Game")
+        {
+            isMainMenuActive = false;
+        }
+
+        if (!isMainMenuActive && !arePrefabsInstantiated && currentScene.name == "Game")
         {
             StartCoroutine(SpawnPrefabs());
 
@@ -67,7 +81,7 @@ public class GameScript : MonoBehaviour
 
     IEnumerator SpawnPrefabs()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0);
 
         Instantiate(Player, playerSpawnLocation, Quaternion.Euler(0, 0, 0));
 

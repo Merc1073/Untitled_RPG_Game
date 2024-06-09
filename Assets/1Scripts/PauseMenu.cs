@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    GameScript gScript;
+
     public static bool isPaused = false;
 
     public bool isSettingsMenu = false;
@@ -21,7 +23,13 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !isSettingsMenu)
+
+        if (!gScript)
+        {
+            gScript = FindObjectOfType<GameScript>();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !isSettingsMenu)
         {
             if(isPaused)
             {
@@ -53,6 +61,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         isPaused = false;
+        gScript.isMainMenuActive = true;
         SceneManager.LoadScene(0);
     }
 
