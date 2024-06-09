@@ -8,6 +8,8 @@ public class NPC : MonoBehaviour
 
     GameScript gScript;
 
+    public bool isInsideTrigger = false;
+
     private void Update()
     {
 
@@ -38,7 +40,7 @@ public class NPC : MonoBehaviour
             transform.GetChild(1).gameObject.SetActive(false);
         }
 
-        if(gScript.hasKill5CubeQuestFinished)
+        if(gScript.hasKill5CubeQuestFinished && !gScript.npcDialogueThreeEnded)
         {
             gScript.npcDialogueTwoEnded = true;
 
@@ -48,7 +50,7 @@ public class NPC : MonoBehaviour
             transform.GetChild(1).gameObject.SetActive(false);
         }
 
-        if(gScript.npcDialogueThreeEnded)
+        if(gScript.npcDialogueThreeEnded && gScript.hasKill5CubeQuestFinished)
         {
             transform.GetChild(4).gameObject.SetActive(true);
             transform.GetChild(3).gameObject.SetActive(false);
@@ -60,6 +62,20 @@ public class NPC : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            isInsideTrigger = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        isInsideTrigger = false;
 
     }
 

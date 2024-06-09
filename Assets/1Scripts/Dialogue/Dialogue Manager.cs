@@ -113,12 +113,12 @@ public class DialogueManager : MonoBehaviour
             gScript.isDialogueActive = false;
         }
 
-        if(!gScript.npcDialogueThreeEnded && gScript.hasKill5CubeQuestFinished)
+        if (!gScript.npcDialogueThreeEnded && gScript.hasKill5CubeQuestFinished)
         {
             gScript.npcDialogueThreeEnded = true;
-            //gScript.isDialogueActive = false;
+            gScript.isDialogueActive = false;
         }
-        
+
 
         //if(!npc.GetComponent<NPC>().dialogueTwoEnded)
         //{

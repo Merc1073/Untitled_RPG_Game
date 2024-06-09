@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6093509550161068369}
-  - component: {fileID: 8980607228440868404}
   - component: {fileID: 3546533083013745138}
   - component: {fileID: 2738452297105637457}
   m_Layer: 0
@@ -34,29 +33,6 @@ Transform:
   m_Father: {fileID: 205425089736776275}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &8980607228440868404
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38868659932811712}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 7
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &3546533083013745138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7db6c3d01df1e4bb5cd7262c8447bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  insideTrigger: 0
 --- !u!1 &1569852401082067111
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +154,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4085298107289564514}
-  - component: {fileID: 2401646280857296724}
   - component: {fileID: 864164799764920334}
   - component: {fileID: 8437033483371484113}
   m_Layer: 0
@@ -204,29 +178,6 @@ Transform:
   m_Father: {fileID: 205425089736776275}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2401646280857296724
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574029725435890098}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 7
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &864164799764920334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7db6c3d01df1e4bb5cd7262c8447bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  insideTrigger: 0
 --- !u!1 &2382671340715702477
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +220,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2118197301076838733}
-  - component: {fileID: 6359517250992675435}
   - component: {fileID: 6338873401753379413}
   - component: {fileID: 9179114928725436832}
   m_Layer: 0
@@ -295,29 +244,6 @@ Transform:
   m_Father: {fileID: 205425089736776275}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &6359517250992675435
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2382671340715702477}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 7
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &6338873401753379413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,8 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7db6c3d01df1e4bb5cd7262c8447bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  insideTrigger: 0
---- !u!1 &5812623714503962174
+--- !u!1 &4932037379431806761
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -365,24 +290,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5683115642614845465}
-  - component: {fileID: 223877916642174276}
-  - component: {fileID: 5997978826906066256}
-  - component: {fileID: 4445126988119750982}
+  - component: {fileID: 6843543736856738566}
+  - component: {fileID: 8392904482319611377}
+  - component: {fileID: 2966011731478791196}
   m_Layer: 0
-  m_Name: Dialogue4
+  m_Name: Dialogue5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &5683115642614845465
+--- !u!4 &6843543736856738566
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5812623714503962174}
+  m_GameObject: {fileID: 4932037379431806761}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -391,36 +315,13 @@ Transform:
   m_Father: {fileID: 205425089736776275}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &223877916642174276
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5812623714503962174}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 7
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &5997978826906066256
+--- !u!114 &8392904482319611377
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5812623714503962174}
+  m_GameObject: {fileID: 4932037379431806761}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bd5f612016d2654a85c5bd480ac2db6, type: 3}
@@ -432,19 +333,18 @@ MonoBehaviour:
     - Sorry, this lazy dev still hasn't added anything new to me.
     - You get to keep watching me stand like a lemon.
     - One day man, one day...
---- !u!114 &4445126988119750982
+--- !u!114 &2966011731478791196
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5812623714503962174}
+  m_GameObject: {fileID: 4932037379431806761}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d7db6c3d01df1e4bb5cd7262c8447bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  insideTrigger: 0
 --- !u!1 &8488663894318989455
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,6 +355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 205425089736776275}
   - component: {fileID: 8149019475847342161}
+  - component: {fileID: 5949389548724374329}
   m_Layer: 0
   m_Name: NPC
   m_TagString: NPC
@@ -478,7 +379,8 @@ Transform:
   - {fileID: 4085298107289564514}
   - {fileID: 6093509550161068369}
   - {fileID: 2118197301076838733}
-  - {fileID: 5683115642614845465}
+  - {fileID: 4187563499902100089}
+  - {fileID: 6843543736856738566}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -492,5 +394,92 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1a1306629b22fd4e906e201e4920034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInsideTrigger: 0
+--- !u!136 &5949389548724374329
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8488663894318989455}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 7
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!1 &8870818947658022002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4187563499902100089}
+  - component: {fileID: 2802221656071406461}
+  - component: {fileID: 825017534110219182}
+  m_Layer: 0
+  m_Name: Dialogue4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4187563499902100089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8870818947658022002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 205425089736776275}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2802221656071406461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8870818947658022002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bd5f612016d2654a85c5bd480ac2db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dial:
+    name: Generic NPC
+    sentences:
+    - Sorry, this lazy dev still hasn't added anything new to me.
+    - You get to keep watching me stand like a lemon.
+    - One day man, one day...
+--- !u!114 &825017534110219182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8870818947658022002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7db6c3d01df1e4bb5cd7262c8447bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

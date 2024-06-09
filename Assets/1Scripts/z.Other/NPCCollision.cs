@@ -9,7 +9,6 @@ public class NPCCollision : MonoBehaviour
     //DialogueManager dialManager;
 
     [SerializeField]
-    private bool insideTrigger = false;
 
     private void Update()
     {
@@ -23,7 +22,7 @@ public class NPCCollision : MonoBehaviour
         //    dialManager = FindObjectOfType<DialogueManager>();
         //}
 
-        if(insideTrigger)
+        if(transform.parent.gameObject.GetComponent<NPC>().isInsideTrigger)
         {
             if(Input.GetMouseButtonDown(0) && !gScript.isDialogueActive)
             {
@@ -32,7 +31,7 @@ public class NPCCollision : MonoBehaviour
             }
         }
 
-        if(!insideTrigger)
+        if(!transform.parent.gameObject.GetComponent<NPC>().isInsideTrigger)
         {
             FindObjectOfType<DialogueManager>().InterruptDialogue();
         }
@@ -57,23 +56,5 @@ public class NPCCollision : MonoBehaviour
     //        GetComponent<DialogueTrigger>().TriggerDialogue();
     //    }
     //}
-
-    public void OnTriggerStay(Collider other)
-    {
-
-        if (other.gameObject.CompareTag("Player"))
-        {
-            insideTrigger = true;
-        }
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.CompareTag("Player"))
-        {
-            insideTrigger = false;
-            Debug.Log("Player left.");
-        }
-    }
 
 }
