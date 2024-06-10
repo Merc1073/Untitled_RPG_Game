@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour
         totalForceMultiplier = forceMultiplier;// + gamescript.globalEnemyForceMultiplier;
 
 
-        if(player)
+        if(player && gScript.isPlayerAlive)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 

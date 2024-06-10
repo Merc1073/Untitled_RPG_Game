@@ -5,17 +5,23 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
 
+    GameScript gScript;
+
     public GameObject player;
 
     private void Update()
     {
-        transform.position = player.transform.position;
+        if (!gScript)
+        {
+            gScript = FindObjectOfType<GameScript>();
+        }
 
-        //Vector3 newRotation = new Vector3(player.transform.eulerAngles.x, player.transform.eulerAngles.y, player.transform.eulerAngles.z);
-
-        //gameObject.transform.eulerAngles = newRotation;
-
-        transform.rotation = player.transform.rotation;
+        if(gScript.gs_CurrentPlayer)
+        {
+            player = gScript.gs_CurrentPlayer;
+            transform.position = player.transform.position;
+            transform.rotation = player.transform.rotation;
+        }
     }
 
 }

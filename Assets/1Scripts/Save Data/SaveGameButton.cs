@@ -23,7 +23,7 @@ public class SaveGameButton : MonoBehaviour
 
         if(saveCooldown <= 0f)
         {
-            saveButton.onClick.AddListener(() => gScript.SavePlayer());
+            //saveButton.onClick.AddListener(() => gScript.SavePlayer());
             saveButton.onClick.AddListener(() => gScript.SaveGameData());
             
             saveCooldown = originalSaveCooldown;

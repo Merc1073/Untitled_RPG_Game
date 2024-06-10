@@ -11,32 +11,52 @@ public class GameScript : MonoBehaviour
 
     [Header("Game Objects")]
     public GameObject player;
-    GameObject currentPlayer;
     public GameObject enemy;
     public GameObject npc;
 
+    [Header("GS Variables")]
+    public float gs_Timer;
+    public float gs_OriginalTimer;
+    public bool gs_IsTimerActive = false;
+
     [Header("Player Variables")]
-    public float gsPlayerHealth;
-    public Vector3 gsPlayerPosition;
-    public Vector3 gsPlayerPositionOffset;
+    public GameObject gs_CurrentPlayer;
+    public float gs_PlayerHealth;
+    public float gs_PlayerRespawnTime;
+    public Vector3 gs_PlayerPosition;
+    public Vector3 gs_PlayerPositionOffset;
+    public Vector3 gs_PlayerCameraOffset;
+    public bool gs_hasCameraActivated;
+
+    [Header("Player Booleans")]
+    public bool isPlayerChangingScenes = false;
+    public bool canPlayerControl = true;
+    public bool isPlayerFound = false;
+    public bool isPlayerAlive = true;
 
     [Header("Game Master Variables")]
     public float fadeTime;
+    public float fadeCooldown;
     public int caveEnemyCounter;
+    public bool gs_useNormalFadeAnim = false;
+    public bool gs_useFadeOutOnly = false;
 
     [Header("Booleans 1")]
     public bool isMainMenuActive = true;
     public bool hasGameStarted = false;
-    public bool isPlayerChangingScenes = false;
     public bool isDialogueActive = false;
-    public bool canPlayerControl = true;
     public bool toDestroyPlayer = false;
     public bool toDestroyNpc = false;
 
     [Header("Booleans 2")]
     public bool arePrefabsInstantiated = false;
     public bool isLoadingData = false;
-    public bool isPlayerFound = false;
+
+    [Header("Current Checkpoint")]
+    public GameObject gs_Checkpoint;
+    public Vector3 gs_CheckpointPosition;
+    public Vector3 gs_CheckpointOffset;
+    //public bool gs_hasPlayerRespawned = false;
 
     [Header("Positions")]
     public Vector3 playerSpawnLocation;
@@ -88,28 +108,29 @@ public class GameScript : MonoBehaviour
     private void Update()
     {
 
-        Debug.Log(Application.persistentDataPath);
-
         currentScene = SceneManager.GetActiveScene();
 
-        if(!currentPlayer)
+        if(gs_hasCameraActivated && gs_CurrentPlayer)
+        {
+            GameObject.FindGameObjectWithTag("MainCamera").transform.position = gs_CurrentPlayer.gameObject.transform.position + gs_PlayerCameraOffset;
+            canPlayerControl = true;
+            gs_hasCameraActivated = false;
+        }
+
+        if (!gs_CurrentPlayer)
         {
             isPlayerFound = false;
         }
 
-        if(!currentPlayer && !isPlayerFound)
+        else
         {
-            currentPlayer = GameObject.FindGameObjectWithTag("Player");
-
-            if(currentPlayer)
-            {
-                isPlayerFound = true;
-            }
+            isPlayerFound = true;
         }
+        
 
         if (!isMainMenuActive && !hasGameStarted && !arePrefabsInstantiated && currentScene.name == "Game" && !isLoadingData)
         {
-            StartGame();
+            StartNewGame();
 
             arePrefabsInstantiated = true;
             hasGameStarted = true;
@@ -117,14 +138,58 @@ public class GameScript : MonoBehaviour
 
         if(!isMainMenuActive && !arePrefabsInstantiated && currentScene.name == "Game" && isLoadingData)
         {
-            LoadObjects();
-
+            LoadGame();
+ 
             arePrefabsInstantiated = true;
             isLoadingData = false;
+
+            gs_hasCameraActivated = true;
+        }
+
+        if(gs_Checkpoint)
+        {
+            gs_CheckpointPosition = gs_Checkpoint.transform.position;
+            Debug.Log("Current checkpoint position is: " + gs_CheckpointPosition);
+        }
+
+        if(!gs_IsTimerActive)
+        {
+            gs_Timer = gs_OriginalTimer;
+        }
+
+        if(gs_IsTimerActive)
+        {
+            gs_Timer -= Time.deltaTime;
+        }
+
+        if (!isPlayerAlive && gs_CurrentPlayer)
+        {
+            gs_CurrentPlayer.transform.parent.gameObject.SetActive(false);
+
+            gs_IsTimerActive = true;
+
+            if(gs_Timer <= 0f)
+            {
+                isPlayerChangingScenes = true;
+                //gs_useFadeOutOnly = true;
+
+                fadeCooldown -= Time.deltaTime;
+                gs_useNormalFadeAnim = true;
+
+                if (fadeCooldown <= 0f)
+                {
+                    LoadGameData();
+                }
+            }
+        }
+
+        if (isPlayerAlive && gs_CurrentPlayer)
+        {
+            gs_CurrentPlayer.gameObject.SetActive(true);
         }
 
 
-    //--------------------------------------------ALL QUESTS-------------------------------------------
+        //--------------------------------------------ALL QUESTS-------------------------------------------
 
         if (hasKill5CubeQuestStarted)
         {
@@ -139,10 +204,12 @@ public class GameScript : MonoBehaviour
 
     //----------------------------------SPAWNING + DESPAWNING OBJECTS----------------------------------
 
-    public void StartGame()
+    public void StartNewGame()
     {
-        Instantiate(player, playerSpawnLocation + gsPlayerPositionOffset, Quaternion.Euler(0, 0, 0));
+        Instantiate(player, playerSpawnLocation + gs_PlayerPositionOffset, Quaternion.Euler(0, 0, 0));
         Instantiate(npc, npcSpawnLocation, Quaternion.Euler(0, 0, 0));
+
+        isPlayerAlive = true;
 
         caveEnemyCounter = 5;
 
@@ -159,10 +226,11 @@ public class GameScript : MonoBehaviour
 
     }
 
-    public void LoadObjects()
+    public void LoadGame()
     {
-        Instantiate(player, gsPlayerPosition, Quaternion.Euler(0, 0, 0));
+        Instantiate(player, gs_PlayerPosition, Quaternion.Euler(0, 0, 0));
         Instantiate(npc, npcSpawnLocation, Quaternion.Euler(0, 0, 0));
+        Debug.Log("Objects loaded.");
     }
 
 
@@ -171,35 +239,27 @@ public class GameScript : MonoBehaviour
 
     //---------------------------------SAVING AND LOADING PLAYER DATA-----------------------------------
 
-    public void SavePlayer()
-    {
-        SaveSystem.SavePlayer(currentPlayer.GetComponent<MainPlayer>());
-        Debug.Log("Player data has been saved.");
-    }
+    //public void SavePlayer()
+    //{
+    //    SaveSystem.SavePlayer(gs_CurrentPlayer.GetComponent<MainPlayer>());
+    //    Debug.Log("Player data has been saved.");
+    //}
 
     public void LoadPlayer()
     {
-        PlayerData data = SaveSystem.LoadPlayer();
+        //PlayerData data = SaveSystem.LoadPlayer();
 
-        gsPlayerHealth = data.health;
+        //gsPlayerHealth = data.health;
 
-        Vector3 playerPosition;
+        //Vector3 playerPosition;
 
-        playerPosition.x = data.position[0];
-        playerPosition.y = data.position[1];
-        playerPosition.z = data.position[2];
+        //playerPosition.x = data.position[0];
+        //playerPosition.y = data.position[1];
+        //playerPosition.z = data.position[2];
 
-        gsPlayerPosition = playerPosition;
+        //gs_PlayerPosition = playerPosition;
 
-        isLoadingData = true;
-
-        isPlayerChangingScenes = true;
-        isMainMenuActive = false;
-
-        toDestroyPlayer = false;
-        toDestroyNpc = false;
-
-        StartCoroutine(StartingGame());
+        
     }
 
 
@@ -219,6 +279,16 @@ public class GameScript : MonoBehaviour
 
         GameData data = SaveSystem.LoadGameData();
 
+        gs_CheckpointPosition.x = data.checkpointPosition[0];
+        gs_CheckpointPosition.y = data.checkpointPosition[1];
+        gs_CheckpointPosition.z = data.checkpointPosition[2];
+
+        Debug.Log(gs_CheckpointPosition);
+
+        gs_PlayerPosition = gs_CheckpointPosition + gs_CheckpointOffset;
+
+        isPlayerAlive = data.isPlayerAlive;
+
         caveEnemyCounter = data.caveEnemyCounter;
 
         hasPlayerObtainedNPCSword = data.hasPlayerObtainedSword;
@@ -230,15 +300,101 @@ public class GameScript : MonoBehaviour
         npcDialogueTwoEnded = data.npcDialogueTwoEnded;
         npcDialogueThreeEnded = data.npcDialogueThreeEnded;
 
+        if(gs_useFadeOutOnly)
+        {
+            gs_useNormalFadeAnim = false;
+        }
+
+        else
+        {
+            gs_useNormalFadeAnim = true;
+        }
+
         isCaveDoorOpen = data.isCaveDoorOpen;
+
+        //isPlayerChangingScenes = true;
+
+        arePrefabsInstantiated = false;
+
+        isLoadingData = true;
+
+        isMainMenuActive = false;
+
+        toDestroyPlayer = false;
+        toDestroyNpc = false;
+
+        isPlayerAlive = true;
+
+        fadeCooldown = fadeTime;
+
+        StartingGame();
+
     }
 
+    public void StartingGame()
+    {
 
-    IEnumerator StartingGame()
+        SceneManager.LoadScene(1);
+        gs_useFadeOutOnly = false;
+        gs_useNormalFadeAnim = false;
+        gs_IsTimerActive = false;
+        Debug.Log("Scene changed.");
+
+    }
+
+    public void LoadGameFade()
+    {
+        gs_useNormalFadeAnim = true;
+
+        StartCoroutine(StartingLoad());
+    }
+
+    IEnumerator StartingLoad()
     {
         yield return new WaitForSeconds(fadeTime);
 
-        SceneManager.LoadScene(1);
+        LoadGameData();
     }
+
+    //public void GSTimerSetter(float time)
+    //{
+    //    gs_Timer = time;
+
+    //    GSTimer();
+    //}
+
+    //public void GSTimer()
+    //{
+    //    gs_Timer -= Time.deltaTime;
+
+    //    if(gs_Timer <= 0f)
+    //    {
+    //        LoadGameData();
+    //    }
+    //}
+
+    //public void PlayerRespawning()
+    //{
+    //    LoadGameData();
+    //}
+
+    //IEnumerator StartingGame()
+    //{
+    //    yield return new WaitForSeconds(fadeTime);
+
+    //    SceneManager.LoadScene(1);
+    //    //LoadObjects();
+    //}
+
+    //IEnumerator PlayerRespawning()
+    //{
+
+    //    gs_CurrentPlayer.transform.parent.gameObject.SetActive(false);
+
+    //    yield return new WaitForSeconds(gs_PlayerRespawnTime);
+
+    //    LoadGameData();
+
+    //}
 
 }

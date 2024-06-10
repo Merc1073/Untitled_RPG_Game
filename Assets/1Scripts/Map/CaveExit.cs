@@ -42,6 +42,7 @@ public class CaveExit : MonoBehaviour
 
     IEnumerator ChangeArea()
     {
+        gScript.gs_useNormalFadeAnim = true;
         gScript.isPlayerChangingScenes = true;
         gScript.canPlayerControl = false;
 
@@ -50,6 +51,7 @@ public class CaveExit : MonoBehaviour
         playerCollider.gameObject.transform.position = villageSpawn.transform.position;
         GameObject.FindGameObjectWithTag("MainCamera").transform.position = playerCollider.gameObject.transform.position + cameraOffset;
 
+        gScript.gs_useNormalFadeAnim = false;
         gScript.isPlayerChangingScenes = false;
         gScript.canPlayerControl = true;
 

@@ -23,8 +23,7 @@ public class LoadGameButton : MonoBehaviour
 
         if (saveCooldown <= 0f)
         {
-            loadButton.onClick.AddListener(() => gScript.LoadPlayer());
-            loadButton.onClick.AddListener(() => gScript.LoadGameData());
+            loadButton.onClick.AddListener(() => gScript.LoadGameFade());
 
             saveCooldown = originalSaveCooldown;
         }

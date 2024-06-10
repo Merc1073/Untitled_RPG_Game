@@ -18,6 +18,8 @@ public class MainPlayer : MonoBehaviour
     [SerializeField] private GameObject healthBar;
     [SerializeField] private GameObject mainPlayer;
 
+    [SerializeField] private GameObject deathParticles;
+
     private float rotateVelocity;
     //private float rotateSpeedMovement;
 
@@ -39,9 +41,10 @@ public class MainPlayer : MonoBehaviour
             gScript = FindObjectOfType<GameScript>();
         }
 
+        gScript.gs_CurrentPlayer = this.gameObject;
+
         if(gScript.hasPlayerObtainedNPCSword)
         {
-            //transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
             transform.parent.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
         }
 
@@ -67,13 +70,21 @@ public class MainPlayer : MonoBehaviour
 
         health = healthBar.GetComponent<PlayerHealthBar>().health;
 
-        gScript.gsPlayerHealth = health;
+        gScript.gs_PlayerHealth = healthBar.GetComponent<PlayerHealthBar>().health;
 
-        gScript.gsPlayerPosition = transform.position;
+        //healthBar.GetComponent<PlayerHealthBar>().health = gScript.gsPlayerHealth;
+        gScript.gs_PlayerPosition = transform.position;
 
         if(gScript.toDestroyPlayer)
         {
             Destroy(gameObject.transform.parent.gameObject);
+        }
+
+        if(healthBar.GetComponent<PlayerHealthBar>().health <= 0f)
+        {
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
+
+            gScript.isPlayerAlive = false;
         }
 
     }

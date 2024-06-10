@@ -22,6 +22,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
+        gScript.gs_useNormalFadeAnim = true;
         gScript.isPlayerChangingScenes = true;
         gScript.isMainMenuActive = false;
 
@@ -50,6 +51,7 @@ public class MainMenu : MonoBehaviour
     {
         yield return new WaitForSeconds(gScript.fadeTime);
 
+        gScript.gs_useNormalFadeAnim = false;
         SceneManager.LoadScene(1);
     }
 

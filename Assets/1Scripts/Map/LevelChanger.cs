@@ -17,10 +17,20 @@ public class LevelChanger : MonoBehaviour
             gScript = FindObjectOfType<GameScript>();
         }
 
-        if (gScript.isPlayerChangingScenes)
+        if (gScript.gs_useNormalFadeAnim)
         {
             StartCoroutine(LevelFade());
         }
+
+        if(gScript.gs_useFadeOutOnly)
+        {
+            FadeOutOnly();
+        }
+        //if(!gScript.isPlayerAlive && gScript.gs_CurrentPlayer)
+        //{
+        //    StartCoroutine(LevelFade());
+        //}
+
     }
 
     IEnumerator LevelFade()
@@ -33,9 +43,16 @@ public class LevelChanger : MonoBehaviour
 
         anim.SetTrigger("FadeIN");
 
-        FindObjectOfType<GameScript>().isPlayerChangingScenes = false;
+        gScript.isPlayerChangingScenes = false;
         gScript.canPlayerControl = true;
+    }
 
+    public void FadeOutOnly()
+    {
+        anim.SetTrigger("FadeIN");
+
+        gScript.isPlayerChangingScenes = false;
+        gScript.canPlayerControl = true;
     }
 
 }

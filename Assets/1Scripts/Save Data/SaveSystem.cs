@@ -8,17 +8,17 @@ public static class SaveSystem
 
 
 
-    public static void SavePlayer(MainPlayer player)
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.savdat";
-        FileStream stream = new FileStream(path, FileMode.Create);
+    //public static void SavePlayer(MainPlayer player)
+    //{
+    //    BinaryFormatter formatter = new BinaryFormatter();
+    //    string path = Application.persistentDataPath + "/player.savdat";
+    //    FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = new PlayerData(player);
+    //    PlayerData data = new PlayerData(player);
 
-        formatter.Serialize(stream, data);
-        stream.Close();
-    }
+    //    formatter.Serialize(stream, data);
+    //    stream.Close();
+    //}
 
     public static void SaveGameData(GameScript masterScript)
     {
@@ -40,26 +40,26 @@ public static class SaveSystem
 
 
 
-    public static PlayerData LoadPlayer()
-    {
-        string path = Application.persistentDataPath + "/player.savdat";
-        if(File.Exists(path))
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
+    //public static PlayerData LoadPlayer()
+    //{
+    //    string path = Application.persistentDataPath + "/player.savdat";
+    //    if(File.Exists(path))
+    //    {
+    //        BinaryFormatter formatter = new BinaryFormatter();
+    //        FileStream stream = new FileStream(path, FileMode.Open);
 
-            PlayerData data =  formatter.Deserialize(stream) as PlayerData;
-            stream.Close();
+    //        PlayerData data =  formatter.Deserialize(stream) as PlayerData;
+    //        stream.Close();
 
-            return data;
-        }
+    //        return data;
+    //    }
 
-        else
-        {
-            Debug.LogError("Save file not found in " + path);
-            return null;
-        }
-    }
+    //    else
+    //    {
+    //        Debug.LogError("Save file not found in " + path);
+    //        return null;
+    //    }
+    //}
 
     public static GameData LoadGameData()
     {
